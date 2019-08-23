@@ -3,6 +3,7 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 var mime = require('mime');
+var url = require('url');
 // 2.创建服务
 http.createServer(function(req, res) {
     //为res对象添加一个render()函数
@@ -20,6 +21,12 @@ http.createServer(function(req, res) {
 
     req.url = req.url.toLowerCase();
     req.method = req.method.toLowerCase();
+
+    var urlObj = url.parse(req.url, true);
+
+    // console.log(urlObj);
+    urlObj.query.id
+
     // 3.根据请求路径，返回对应的html
     if (req.url === '/' || req.url === '/index' && req.method === 'get') {
         // 4.读取index.html 并返回
@@ -35,7 +42,20 @@ http.createServer(function(req, res) {
     } else if (req.url === '/item' && req.method === 'get') {
         res.render(path.join(__dirname, 'views', 'item.html'));
     } else if (req.url.startsWith('/add') && req.method === 'get') {
-        res.render(path.join(__dirname, 'views', 'add.html'));
+        var list = [];
+        list.push(urlObj.query);
+        fs.writeFile(path.join(__dirname, 'data', 'data.json'), JSON.stringify(list), function(err) {
+            if (err) {
+                throw err;
+            }
+            console.log('ok');
+            // 设置响应报文头，告诉浏览器跳转页面
+            res.statusCode = 302;
+            res.statusMessage = 'Found';
+            res.setHeader('Location', '/');
+            res.end();
+        });
+        // res.render(path.join(__dirname, 'views', 'add.html'));
     } else if (req.url === '/add' && req.method === 'post') {
         res.render(path.join(__dirname, 'views', 'add.html'));
     } else if (req.url.startsWith('/resources') && req.method === 'get') {
