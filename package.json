@@ -1,0 +1,23 @@
+{
+  "name": "hackernews",
+  "version": "1.0.0",
+  "description": "\"# node-Study\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamboov/node-Study.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamboov/node-Study/issues"
+  },
+  "homepage": "https://github.com/adamboov/node-Study#readme",
+  "dependencies": {
+    "mime": "^2.4.4"
+  }
+}
