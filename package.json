@@ -19,6 +19,6 @@
   "homepage": "https://github.com/adamboov/node-Study#readme",
   "dependencies": {
     "mime": "^2.4.4",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   }
 }
